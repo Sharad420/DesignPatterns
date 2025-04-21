@@ -1,2 +1,2 @@
 # DesignPatterns
-Multiple mini projects each implementing a Design Pattern, inspired by HeadFirst Design Patterns
+Multiple mini projects each implementing a Design Pattern in Java, inspired by HeadFirst Design Patterns.
