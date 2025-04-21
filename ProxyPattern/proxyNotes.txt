@@ -1,0 +1,27 @@
+A proxy is basically an object. It acts as a local represnetative for a remote object.
+
+The proxy technique consists of the client which calls the method on a proxy object/ RMI stub.
+This object packages the method information, arguments etc and sends it over the network to where the remote service is present.
+A service helper/RMI skeleton unpacks all the information and invokes the method on the actual service. 
+The service returns a primitive or a Serializable(something that can be sent in a serial stream over the network) to the service helper.
+The service helper packages this return value and sends it over the network.
+The stub receives, unpackages and passes on the data to the client.
+The client and service find each other via a lookup table/ registry.
+
+
+Step 1: make a remote interface.
+- Extend Remote
+- Throw exceptions for all methods(thereby agreeing that method calls over the network are risky).
+Step 2: Implement the remote interface. Both the stub and service use this interface.
+- extend UnicastRemoteObject(to give it remote functionality).
+- Constructor of subclass throws exception because super class does, you HAVE to throw exception.
+- Ensure arguments and return types are primitives or Serializable.
+- Register the service with rmi registry using Naming module.
+
+Step 3: Run the Rmi registry.
+- The Client must be able to lookup the service using RMI registry.
+- RMI actually subs in a stub for the remote service, and returns that when called in client.
+- The lookup returns an Object. So remember to cast to the service type.
+- Note RMI creates the stub and the skeleton automatically for you.   
+Step 4: Bring up another JVM and start your service.
+
